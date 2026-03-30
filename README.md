@@ -71,6 +71,7 @@ chmod +x install.sh
 - Backup existing configs to `~/dotfiles_backup_YYYYMMDD_HHMMSS`
 - Install yay if needed
 - Install m3wal via AUR
+- Install Tela Icon Themes as default 
 - Copy all dotfiles
 - Set Fish as default shell
 - Apply initial theme
