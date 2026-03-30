@@ -12,6 +12,12 @@
 
 ---
 
+### Demo Video
+
+https://github.com/user-attachments/assets/0523e493-e094-4353-ba6e-6bf922d4ef20
+
+---
+
 ## Screenshots
 
 **Clean Desktop**
