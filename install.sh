@@ -45,7 +45,7 @@ sudo pacman -S --needed --noconfirm \
     jq bc rsync fastfetch pamixer python-xlib \
     networkmanager network-manager-applet blueman bluez bluez-utils \
     pipewire pipewire-pulse xorg-xprop ffmpeg \
-    xcompmgr qt5ct
+    xcompmgr qt5ct pcmanfm imagemagick neovim wmctrl
 
 # Install fonts
 echo "Installing fonts..."
@@ -75,6 +75,13 @@ if [ -d "fonts" ]; then
     fc-cache -fv
     success "Custom fonts installed"
 fi
+
+# Install Tela icon theme
+echo "Installing Tela icon theme..."
+git clone https://github.com/vinceliuice/Tela-icon-theme.git /tmp/Tela-icon-theme
+cd /tmp/Tela-icon-theme && ./install.sh
+cd -
+success "Tela icon theme installed"
 
 # Set fish as default shell
 echo "Setting fish as default shell..."
@@ -148,17 +155,17 @@ echo "================================"
 echo "Backup saved at: $BACKUP_DIR"
 echo ""
 echo "Installed components:"
-echo "  • openbox, rofi, dunst, fastcompmgr"
-echo "  • alacritty, feh, xsettingsd"
-echo "  • eww, m3wal, mpdris2"
-echo "  • blueman, networkmanager"
-echo "  • Nerd Fonts & icon fonts"
-echo "  • FlatColor GTK theme"
-echo "  • Openbox themes"
+echo "openbox, rofi, dunst, fastcompmgr"
+echo "alacritty, feh, xsettingsd"
+echo "eww, m3wal, mpdris2"
+echo "blueman, networkmanager"
+echo "Nerd Fonts & icon fonts"
+echo "FlatColor GTK theme"
+echo "Openbox themes"
 echo ""
 echo "Next steps:"
-echo "  1. Logout dan login kembali"
-echo "  2. Pilih Openbox sebagai window manager"
-echo "  3. Ganti wallpaper: m3wal /path/to/wallpaper.jpg --full"
+echo "1. Logout and login again"
+echo "2. Choose Openbox as a WM"
+echo "3. Change wallpaper: m3wal /path/to/wallpaper.jpg --full"
 echo ""
 echo "================================"

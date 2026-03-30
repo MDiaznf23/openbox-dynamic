@@ -75,15 +75,6 @@ button.app-item {
   border-bottom: 1px solid $outline-variant;
 }
 
-.profile-pic {
-  background-image: url("/home/diaz/.config/eww/assets/profile.jpg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%; 
-  min-width: 40px;
-  min-height: 40px;
-}
-
 .search-bar {
   background: $surface-container-high;
   border-radius: 10px;

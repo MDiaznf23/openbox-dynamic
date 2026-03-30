@@ -5,12 +5,15 @@
 (defpoll menu_data
   :interval "999999s"
   :initial '{"categories": []}'
-  "cat /home/diaz/.cache/eww-menu.json")
+  "cat ~/.cache/eww-menu.json")
 
 (defpoll initial_apps
   :interval "999999s"
   :initial "[]"
   "~/.config/eww/scripts/filter-apps.sh 'Internet'")
+
+(defpoll profile-pic :interval "999h"
+  `echo "$HOME/.config/eww/assets/profile.jpg"`)
 
 (defwidget cat_tab [cat icon]
   (button
@@ -45,7 +48,13 @@
 
 (defwidget start_menu_header []
   (box :class "menu-header" :orientation "h" :space-evenly false :spacing 10 :valign "center"
-    (box :class "profile-pic" :width 40 :height 40)
+    (box :class "profile-pic"
+         :style "background-image: url('${profile-pic}');
+                 background-size: cover;
+                 background-position: center;
+                 border-radius: 50%;
+                 min-width: 40px;
+                 min-height: 40px;")
     (button :class "search-bar"
             :hexpand true
             :halign "fill"
