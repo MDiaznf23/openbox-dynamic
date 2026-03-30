@@ -1,0 +1,102 @@
+/* EWW Calendar - Light Mode (Material 3 Style) */
+
+.calendar-box {
+  background-color: transparent;
+
+  background-image: linear-gradient(90deg,
+    $surface,               // Light surface
+    $surface-container-low, // Lighter container
+    $secondary-fixed,       // Soft secondary fixed
+    );
+  border: 1px solid $outline-variant;
+  border-radius: 5px;
+  min-width: 217px;
+  padding: 6px 0px 0px 0px ;
+}
+
+.cal-header {
+  padding: 6px 0px 0px 0px;
+}
+
+.cal-month {
+  color: $on-surface;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.cal-year {
+  color: $on-surface-variant;
+  font-size: 12px;
+}
+
+.cal-widget {
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+  font-size: 12px;
+  padding: 6px;
+  /* Properti spesifik GTK3 untuk mengatur jarak antar elemen kalender */
+  -GtkCalendar-inner-border: 0;
+  -GtkCalendar-vertical-separation: 0;
+  -GtkCalendar-horizontal-separation: 0;
+}
+
+.cal-widget calendar:indeterminate {
+  color: $outline-variant;
+  opacity: 0.5;
+}
+
+.cal-widget calendar {
+  color: $on-surface;
+}
+
+.cal-widget calendar:selected {
+  background: transparent;
+  // Pada light mode, primary-container memberikan kontras yang nyaman untuk mata
+  color: $primary; 
+  font-weight: bold;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+.cal-widget label {
+  min-width: 28px;
+  min-height: 28px;
+}
+
+/* === TOOLTIPS === */
+
+.weather-tooltips-container {
+  background-color: transparent;
+
+  background-image: linear-gradient(90deg,
+    $surface,
+    $surface-container-low,
+    $secondary-fixed, 
+    );
+
+  border-radius: 5px;
+  padding: 10px;
+  border: 2px solid $outline-variant;
+}
+
+.icon-weather-tool {
+  font-size: 20px;
+  color: $primary; // Memberi aksen warna pada ikon cuaca
+}
+
+.weather-coord {
+  font-size: 9px;
+  color: $on-surface-variant;
+}
+
+.weather-temp {
+  font-size: 10px;
+  color: $on-surface-variant;
+}
+
+.weather-temp-now {
+  font-size: 30px;
+  color: $on-surface;
+  font-weight: bold;
+}

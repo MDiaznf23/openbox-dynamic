@@ -1,0 +1,155 @@
+;; Eww Bar Configuration
+
+;; Tasklist listener 
+(deflisten tasklist :initial "[]"
+  "~/.config/eww/scripts/tasklist.py")
+
+(deflisten ob_workspaces :initial "[]"
+  "bash ~/.config/eww/scripts/ob-workspaces.sh")
+
+;; Definisi variable untuk system variable
+(defpoll system_status :interval "2s"
+  :initial '{"wifi_icon":"","wifi_desc":"","wifi_connected":false,"bat_icon":"","bat_desc":"","bat_capacity":0,"bat_charging":false,"bright_icon":"","bright_desc":"","bright_pct":1,"vol_icon":"","vol_desc":"","vol_pct":0,"vol_muted":false}'
+  "~/.config/eww/scripts/system-status.sh")
+
+;; Variable untuk waktu
+(defpoll time :interval "1s"
+  "date '+%H:%M'")
+
+(defpoll date :interval "60s"
+  "date '+%a, %d %b'")
+
+;; Widget tasklist
+(defwidget tasklist_widget []
+  (box
+    :class "tasklist"
+    :orientation "h"
+    :spacing 8
+    :halign "start"
+    :valign "center"
+    :space-evenly false
+    (for win in tasklist
+      (button
+        :class "task-btn ${win.focused ? 'focused' : ''} ${win.minimized ? 'minimized' : ''}"
+        :onclick "bash ~/.config/eww/scripts/toggle-window.sh ${win.id}"
+        (box
+          :orientation "h"
+          :class "task-box ${win.focused ? 'task-focused' : 'task-unfocused'}"
+          :spacing 0
+          :valign "center"
+          (image
+            :path {win.icon}
+            :image-width 28
+            :image-height 28))))))
+
+(defwidget ob_workspaces_widget []
+  (box
+    :class "workspaces"
+    :orientation "h"
+    :spacing 4
+    :valign "center"
+    :space-evenly false
+    (for ws in ob_workspaces
+      (button
+        :class "ws-btn ${ws.focused ? 'focused' : ''}"
+        :onclick "wmctrl -s ${ws.num - 1}"
+        "${ws.num}"))))
+
+;; Main Bar Widget
+(defwidget bar-widget []
+  (centerbox :class "bar-container"
+             :orientation "h"
+             :valign "center"
+             :vexpand false
+    ;; Kiri — hanya power button
+    (box :class "bar-section-left"
+         :orientation "h"
+         :space-evenly false
+         :halign "start"
+         :spacing 10
+         :valign "center"
+         :vexpand false
+      (button :onclick "~/.config/eww/scripts/toggle-start-menu.sh"
+        (box :class "bar-section-center"
+          (label :class "left-text" :text " ")))
+
+      (ob_workspaces_widget)
+
+      (box :class "bar-section-center"
+        (tasklist_widget))
+    )
+
+    ;; Tengah — kosong
+    (box :class "bar-section-center")
+
+    ;; Kanan — sama seperti sebelumnya
+    (box :class "bar-section-right"
+         :orientation "h"
+         :space-evenly false
+         :halign "end"
+         :spacing 5
+         :valign "center"
+         :vexpand false
+      (box :class "system-tray-bar" :valign "center" :vexpand false
+        (systray :icon-size 16 :spacing 8))
+
+      (button :onclick "~/.config/eww/scripts/toggle-notification-center.sh"
+        (box :class "notification-section-right"
+             :orientation "h"
+             :space-evenly true
+             :halign "end"
+             :spacing 10
+             :valign "center"
+             :vexpand false
+        (label :class "notification-icon"
+               :text {(arraylength(notification_recent) + arraylength(notification_earlier)) > 0 ? "󰂚" : "󰂜"})))
+
+      (button :onclick "eww open --toggle media_window"
+        (box :class "media-section"
+             :orientation "h"
+             :space-evenly true
+             :halign "end"
+             :spacing 10
+             :valign "center"
+             :vexpand false
+          (label :class "media-icon"
+                 :text {media_info.status == "Playing" ? "󰎈" : "󰎇"})))
+        
+      (button :onclick "~/.config/eww/scripts/toggle-control-center.sh"
+        (box :class "status-section-right"
+             :orientation "h"
+             :space-evenly true
+             :halign "end"
+             :spacing 10
+             :valign "center"
+             :vexpand false
+          (label :class "right-text" :text {system_status.wifi_icon})
+          (label :class "right-text" :text {system_status.bright_icon})
+          (label :class "right-text" :text {system_status.vol_icon})))
+
+      (button :onclick "~/.config/eww/scripts/toggle-calendar.sh"
+        (box :class "time-bar"
+           :orientation "v"
+           :space-evenly false
+           :spacing 0
+           :valign "center"
+           :vexpand false
+          (label :class "time-text" :valign "center" :vexpand false :text time)
+          (label :class "time-text" :valign "center" :vexpand false :text date)))
+    )
+  )
+)
+
+;; Window Definition
+(defwindow bar
+  :monitor 0
+  :geometry (geometry 
+    :width "100%"
+    :anchor "bottom center")
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  :windowtype "dock"
+  :wm-ignore false        
+  :reserve (struts :distance "39px" :side "bottom")  
+  (bar-widget))

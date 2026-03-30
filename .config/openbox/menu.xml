@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="root-menu" label="Openbox">
+
+  <item label="Terminal">
+    <action name="Execute">
+      <command>alacritty</command>
+    </action>
+  </item>
+
+  <item label="Firefox">
+    <action name="Execute">
+      <command>firefox</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+
+  <separator />
+
+  <item label="Reconfigure Openbox">
+    <action name="Reconfigure" />
+  </item>
+
+  <item label="Log Out">
+    <action name="Exit">
+      <prompt>yes</prompt>
+    </action>
+  </item>
+
+</menu>
+
+</openbox_menu>

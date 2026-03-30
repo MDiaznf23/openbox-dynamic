@@ -1,0 +1,121 @@
+;;-----------------------------------------------------
+;; POLLING VARIABEL
+;;-----------------------------------------------------
+(defpoll media_position
+  :interval "1s"
+  :initial 0
+  "playerctl -p $(cat /tmp/eww_selected_player 2>/dev/null) position 2>/dev/null | awk '{printf \"%d\", $1 * 1000000}' || echo 0")
+
+(defpoll media_length
+  :interval "5s"
+  :initial 1
+  "playerctl -p $(cat /tmp/eww_selected_player 2>/dev/null) metadata mpris:length 2>/dev/null || echo 1")
+
+(defpoll media_players
+  :interval "3s"
+  :initial "[]"
+  "~/.config/eww/scripts/media_listener.sh --list")
+
+(defvar player_dropdown false)
+
+(deflisten media_info
+  :initial '{"player": "", "status": "Stopped", "title": "No Media", "artist": "", "cover": "", "position": 0, "length": 0}'
+  "~/.config/eww/scripts/media_watch.sh")
+
+;;-----------------------------------------------------
+;; WIDGETS
+;;-----------------------------------------------------
+(defwidget player_list []
+  (box :class "player-dropdown"
+       :orientation "v"
+       :space-evenly false
+       :spacing 4
+    (for player in media_players
+      (button :class {player.player == media_info.player ? "player-item player-item-active" : "player-item"}
+              :onclick "echo '${player.player}' > /tmp/eww_selected_player && eww update player_dropdown=false"
+        (box :spacing 6 :halign "start" :space-evenly false
+          (label :text {player.status == "Playing" ? "󰐊" : "󰏤"}
+                 :style "font-size: 12px;")
+          (label :text {player.player}
+                 :limit-width 14
+                 :xalign 0))))))
+
+(defwidget media_widget []
+  (box :class "media-widget-container"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    (box :class "media-cover-widget"
+         :style {media_info.cover != "" ? "background-image: url('${media_info.cover}'); background-size: contain; background-repeat: no-repeat; background-position: center;" : "background-image: none;"}
+         :visible {media_info.cover != ""})
+    (overlay :halign "fill"
+             :valign "start"
+      ;; Konten utama — jadi base height
+      (box :class "media-widget-info"
+           :orientation "v"
+           :space-evenly false
+           :spacing 5
+           :hexpand true
+        (box :orientation "v"
+             :space-evenly false
+             :halign "center"
+          (button :class "media-widget-name-btn"
+                  :onclick "eww update player_dropdown=${!player_dropdown}"
+                  :visible {media_info.player != ""}
+            (box :spacing 4 :halign "center" :space-evenly false
+              (label :class "media-widget-name"
+                     :text {media_info.player}
+                     :limit-width 10
+                     :xalign 0.5)
+              (label :text {player_dropdown ? "󰅃" : "󰅀"}
+                     :style "font-size: 10px;")))
+          (label :class "media-widget-title"
+                 :text {media_info.title}
+                 :limit-width 18
+                 :xalign 0.5)
+          (label :class "media-widget-artist"
+                 :text {media_info.artist}
+                 :limit-width 20
+                 :xalign 0.5))
+        (scale :class "media-progress-bar"
+               :min 0
+               :max {media_length > 0 ? media_length : 1}
+               :value media_position
+               :draw-value false
+               :orientation "h"
+               :hexpand true
+               :onchange "playerctl -p ${media_info.player} position $(echo {} | awk '{print $1 / 1000000}')")
+        (box :class "media-widget-controls" :halign "center" :spacing 10
+          (button :class "media-widget-btn"
+                  :onclick "playerctl -p ${media_info.player} previous"
+            (box :width 30 :height 30 :halign "center" :valign "center"
+              (label :text "󰒮" :style "font-size: 28px;")))
+          (button :class "media-widget-btn-play"
+                  :onclick "playerctl -p ${media_info.player} play-pause"
+            (box :width 30 :height 30 :halign "center" :valign "center"
+              (label :text {media_info.status == "Playing" ? "󰏤" : "󰐊"}
+                     :style "font-size: 32px;")))
+          (button :class "media-widget-btn"
+                  :onclick "playerctl -p ${media_info.player} next"
+            (box :width 30 :height 30 :halign "center" :valign "center"
+              (label :text "󰒭" :style "font-size: 28px;")))))
+      ;; Dropdown float nimpa konten di bawahnya
+      (revealer :transition "slidedown"
+                :reveal player_dropdown
+                :duration "200ms"
+                :valign "start"
+                :halign "center"
+        (player_list)))))
+
+;;-----------------------------------------------------
+;; WINDOW
+;;-----------------------------------------------------
+(defwindow media_window
+  :monitor 0
+  :geometry (geometry :x "-100px" :y "-50px" :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  :windowtype "dialog"
+  :wm-ignore false
+  (media_widget))

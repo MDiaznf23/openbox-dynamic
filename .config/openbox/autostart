@@ -1,0 +1,7 @@
+fastcompmgr -S -r 8 -o 0.6 -l -8 -t -8 -I 0.05 -O 0.05 &
+m3wal ~/.config/m3-colors/current_wallpaper &
+~/.config/openbox/scripts/start-app.sh &
+python3 ~/.config/eww/scripts/menu-gen.py &
+dunst &
+nm-applet &
+blueman-applet &

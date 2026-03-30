@@ -1,0 +1,46 @@
+(defwidget wallpaper-item [img name]
+  (button
+    :class "wallpaper-item"
+    :onclick "m3wal ~/Pictures/Wallpapers/${name}"
+    (box
+      :orientation "v"
+      :space-evenly false
+      (image
+        :path img
+        :image-width 240
+        :image-height 135))))
+
+(defwidget wallpaper-list []
+  (scroll
+    :vscroll true
+    :hscroll false
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      :class "wallpaper-list"
+      (for item in {wallpapers}
+        (wallpaper-item
+          :img {item.thumb}
+          :name {item.name})))))
+
+(defwidget wallpaper-panel []
+  (box
+    :orientation "v"
+    :space-evenly false
+    :class "wallpaper-panel"
+    (wallpaper-list)))
+
+(defwindow wallpaper-selector
+  :monitor 0
+  :geometry (geometry
+    :x "-10px"
+    :y "10px"
+    :width "260px"
+    :height "100%"
+    :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  (wallpaper-panel))
+
+(defvar wallpapers "[]")

@@ -1,0 +1,228 @@
+/* === Eww Bar Styles === */
+
+/* --- Global --- */
+* {
+  all: unset;
+  font-family: "JetBrains Mono Nerd Font", monospace;
+  font-size: 12px;
+  color: $on-surface;
+  border: none;
+  box-shadow: none;
+}
+
+/* Bar Container (Main Window) */
+.bar-container {
+  background-color: transparent;
+  
+  background-image: linear-gradient(135deg, 
+    $on-secondary-fixed,  
+    $surface-dim,
+    $on-primary-fixed,
+    $surface-container,
+    $on-primary,
+    $surface-container-low,
+    $on-secondary,
+  );
+
+  border-radius: 0px;
+  border-top: 2px solid $outline-variant;
+  padding: 0px 5px 0px 5px;
+  min-height: 40px;
+}
+
+.task-box {
+  padding: 2px 4px;
+}
+
+.task-focused {
+  background: $primary-container;
+  border-radius: 5px;
+}
+
+.task-unfocused {
+  background: transparent;
+  opacity: 0.7;
+}
+
+/* Sections Layout */
+.bar-section-center, 
+.bar-section-left, 
+.bar-section-right {
+  padding: 0px;
+  min-height: 18px;
+}
+
+/* Left Section Padding Adjustment */
+.bar-section-left {
+  padding-right: 6px; 
+  padding-left: 10px;
+}
+
+.mode-indicator {
+  background-color: $on-primary-fixed;
+  padding: 0 10px;
+  border-radius: 15px;
+  min-height: 18px;
+  animation: pulse 2s infinite;
+}
+
+.indicator-i3 {
+  font-family: "Iosevka Nerd Font";
+  font-size: 13px;
+  font-weight: bold;
+  color: $on-surface;
+}
+
+/* === MODULES === */
+
+/* Windows Center Module */
+.windows-center-bar {
+  background-color: $on-secondary-fixed;
+  border-radius: 15px;
+  padding: 0px 10px;
+  min-height: 18px;
+}
+
+/* Workspaces Container */
+.workspaces {
+  border-radius: 15px;
+  padding: 0px;
+  min-height: 28px;
+  
+  background-image: linear-gradient(to bottom right,
+    $surface-container-high,
+    $on-secondary-fixed
+  );
+}
+
+/* Workspace Buttons */
+.ws-btn {
+  padding: 0px 15px;
+  background-color: transparent; 
+  border-radius: 15px;
+}
+
+/* Workspace: Focused (Aktif) */
+.ws-btn.focused {
+  background-image: linear-gradient(to bottom right,
+    $on-primary,
+  );
+  color: $on-primary;
+  border-radius: 15px;
+}
+
+/* Workspace: Hover */
+.ws-btn:hover {
+  background-image: linear-gradient(to bottom,
+    $on-secondary,
+  );
+  color: $on-tertiary;
+  border-radius: 15px;
+}
+
+/* Workspace: Focused + Hover */
+.ws-btn.focused:hover {
+  background-image: linear-gradient(to bottom,
+    $on-secondary,
+  );
+}
+
+/* Right Status Modules (Battery, Wifi, etc) */
+.status-section-right {
+  background-image: linear-gradient(135deg,
+    $on-primary
+  );
+  border-radius: 15px;
+  padding: 0px 12px;
+  min-height: 30px;
+}
+
+.notification-section-right {
+  background-image: linear-gradient(135deg,
+    $on-primary
+  );
+  border-radius: 15px;
+  padding: 0px 16px;
+  min-height: 30px;
+}
+
+.media-section {
+  background-image: linear-gradient(135deg,
+    $on-primary
+  );
+  border-radius: 15px;
+  padding: 0px 16px;
+  min-height: 30px;
+}
+
+.notification-icon {
+  font-size: 14px;
+  color: $on-surface;
+}
+
+.media-icon {
+  font-size: 14px;
+  color: $on-surface;
+}
+
+/* System Tray */
+.system-tray-bar {
+  padding: 0px 5px;
+  min-height: 18px;
+}
+
+/* === TEXT STYLES === */
+
+.left-text {
+  font-size: 14px;
+  color: $on-surface;
+}
+
+.right-text {
+  font-family: "Iosevka Nerd Font";
+  font-size: 14px;
+  color: $on-surface;
+}
+
+.center-text {
+  font-family: "Iosevka Nerd Font";
+  font-size: 13px;
+  font-weight: 700;
+  color: $on-secondary-container; 
+}
+
+.weather-bar {
+  color: $on-surface;
+  font-size: 18px;
+  padding-right: 5px;
+}
+
+.text-weather-bar {
+  font-family: "Iosevka Nerd Font";
+  font-size: 13px;
+  font-weight: 700;
+  color: $on-surface;
+}
+
+.time-bar {
+  min-height: 18px;
+  padding: 0px 5px;
+}
+
+.time-icon {
+  padding: 0px;
+  font-size: 11px;
+  color: $primary; 
+}
+
+.time-text {
+  font-size: 12px;
+  font-weight: 900;
+  color: $on-surface;
+}
+
+.icon-center-bar {
+  padding-right: 5px;
+  color: $secondary; 
+  font-size: 12px;
+}
