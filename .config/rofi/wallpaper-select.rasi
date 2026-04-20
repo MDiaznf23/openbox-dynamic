@@ -1,0 +1,74 @@
+/* ~/.config/rofi/wallpaper-select.rasi */
+@import "~/.cache/m3-colors/rofi.rasi"
+
+* {
+    font: "JetBrains Mono Nerd Font Bold 10";
+    background-color: transparent;
+    text-color: @foreground;
+    margin: 0px;
+    padding: 0px;
+}
+
+window {
+    width: 200px;
+    height: 0px; 
+    
+    location: east;
+    anchor: east;
+    x-offset: -15px;
+    
+    background-color: @background;
+    border: 2px solid;
+    border-color: @selected-normal-background;
+    border-radius: 5px;
+}
+
+mainbox {
+    spacing: 0px;
+    padding: 0px;
+}
+
+inputbar {
+    children: [ entry ];
+    background-color: @active-background;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 0px 0px 10px 0px;
+}
+
+listview {
+    columns: 1;
+    lines: 4;                
+    spacing: 0px;            
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+    scrollbar: false;
+    fixed-height: false;     
+    fixed-columns: true;
+
+    border: 0px;             
+    border-color: transparent;
+}
+
+element {
+    orientation: vertical;
+    padding: 0px;            
+    border-radius: 5px;
+}
+
+element-icon {
+    size: 120px;            
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    cursor: inherit;
+    margin: 0px 0px; 
+}
+
+element selected.normal {
+    background-color: @selected-normal-background;
+}
+
+element-text {
+    enabled: false;
+}

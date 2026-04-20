@@ -1,0 +1,132 @@
+;;-----------------------------------------------------
+;; POLLING VARIABEL
+;;-----------------------------------------------------
+
+(defpoll cal_date :interval "60s"
+  :initial '{"day":1,"month":"January","year":2024}'
+  `date '+{"day":%d,"month":"%B","year":%Y}'`)
+
+;; Weather polls
+(defpoll WEATHER_ICON :interval "1800s" "~/.config/eww/scripts/weather-wrapper.sh icon")  
+(defpoll WEATHER_DESC :interval "1800s" "~/.config/eww/scripts/weather-wrapper.sh desc")
+(defpoll WEATHER_CITY :interval "86400s" "~/.config/eww/scripts/weather-wrapper.sh city")
+(defpoll WEATHER_TEMP :interval "86400s" "~/.config/eww/scripts/weather_wrapper_forecast.sh day0 max")
+(defpoll WEATHER_LAT :interval "86400s" "~/.config/eww/scripts/weather-wrapper.sh lat")
+(defpoll WEATHER_LONG :interval "86400s" "~/.config/eww/scripts/weather-wrapper.sh long")
+(defpoll weather_forecast_data :interval "1h"
+  "~/.config/eww/scripts/weather_wrapper_forecast.sh json")
+
+;;-----------------------------------------------------
+;; WIDGETS
+;;-----------------------------------------------------
+
+(defwidget weather_forecast []
+  (box :orientation "v"
+       :space-evenly true
+       :spacing 2
+       :class "weather-tooltips-container"
+
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 5 
+
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 0
+           :hexpand true
+           :halign "start"
+         (label :class ""
+                :xalign 0
+                :text WEATHER_CITY )
+         (label :class "weather-temp-now"
+                :xalign 0
+                :text WEATHER_TEMP) 
+      ) 
+
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 0
+
+          (label :xalign 0.9 :class "icon-weather-tool" :text WEATHER_ICON)
+          (label :xalign 1 :class "" :text WEATHER_DESC)
+          
+          (box :orientation "h"
+               :spacing 5 
+               :space-evenly false
+               :halign "end"
+              (label :class "weather-coord" :text WEATHER_LAT)
+              (label :class "weather-coord" :text WEATHER_LONG)
+          )
+
+      )
+    )
+    
+    ;;;FORECAST 5 DAYS
+    (box :orientation "h"
+         :space-evenly true
+         :spacing 30
+      
+      (for entry in weather_forecast_data
+        (box :orientation "v"
+             :space-evenly false
+             :spacing 2
+             
+          ;; Tampilkan Hari (e.g., Wednesday)
+          (label :text {entry.day} 
+                 :limit-width 3) 
+                 
+          ;; Tampilkan Icon
+          (label :text {entry.icon})
+
+          ;; Tampilkan Suhu (Max/Min)
+          (label :class "weather-temp" 
+                 :text "${entry.max}")
+        )
+      ) 
+
+    )
+  ) 
+)
+
+(defwidget calendar_box []
+  (box :class "calendar-box"
+       :orientation "v"
+       :spacing 0
+       :space-evenly false
+
+    (box :class "cal-header"
+         :orientation "h"
+         :halign "center"
+         :space-evenly false
+         :spacing 6
+      (label :class "cal-month" :text {cal_date.month})
+      (label :class "cal-year"  :text {cal_date.year}))
+
+    (calendar :class "cal-widget"
+              :show-heading false
+              :halign "center"
+              :vexpand false)))
+
+
+(defwidget time_box []
+  (box :orientation "v"
+       :space-evenly false
+       :spacing 8
+
+    (weather_forecast)
+
+    (calendar_box)))
+
+;;-----------------------------------------------------
+;; WINDOW
+;;-----------------------------------------------------
+
+(defwindow calendar_window
+  :monitor 0
+  :geometry (geometry :x "-10px" :y "-50px" :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  :windowtype "dialog"
+  :wm-ignore false
+  (time_box))

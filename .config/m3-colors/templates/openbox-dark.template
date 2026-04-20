@@ -1,0 +1,46 @@
+# Decorator
+window.active.title.bg: gradient horizontal flat
+window.active.title.bg.color: {{m3onPrimary}}
+window.active.title.bg.colorTo: {{m3onSecondaryFixed}}
+window.inactive.title.bg.color: {{m3surfaceContainerLow}}
+window.*.label.text.color: {{m3onSurface}}
+window.*.button.*.image.color: {{m3onSurface}}
+# Borders
+window.handle.width: 0
+window.client.padding.width: 0
+border.width: 1
+window.active.border.color: {{m3outline}}
+window.inactive.border.color: {{m3outlineVariant}}
+# Title
+padding.width: 10
+padding.height: 8
+window.*.title.bg: Solid Flat
+window.*.*.bg: Parentrelative
+window.label.text.justify: left
+# Menu
+menu.border.width: 6
+menu.separator.width: 2
+menu.separator.padding.width: 10
+menu.separator.padding.height: 2
+menu.overlap.x: -8
+menu.*.bg: flat solid
+menu.*.bg.color: {{m3surfaceContainer}}
+menu.*.color: {{m3surfaceContainer}}
+menu.title.text.color: {{m3onSurface}}
+menu.items.text.color: {{m3onSurfaceVariant}}
+menu.items.active.disabled.text.color: {{m3outline}}
+menu.items.active.text.color: {{m3onSecondaryContainer}}
+menu.title.text.justify: center
+menu.items.active.bg.color: {{m3secondaryContainer}}
+# OSD
+osd.border.width: 1
+osd.border.color: {{m3outline}}
+osd.bg: flat solid
+osd.bg.color: {{m3surfaceContainer}}
+osd.label.bg: flat solid
+osd.label.bg.color: {{m3surfaceContainer}}
+osd.hilight.bg: flat solid
+osd.hilight.bg.color: {{m3error}}
+# Colour Trick
+window.active.button.close.unpressed.image.color: {{m3error}}
+window.inactive.button.close.unpressed.image.color: {{m3errorContainer}}

@@ -1,0 +1,197 @@
+/* Eww Bar Styles */
+
+/* --- Global --- */
+* {
+  all: unset;
+  font-family: "JetBrains Mono Nerd Font", monospace;
+  font-size: 12px;
+  color: $on-surface-variant;
+  border: none;
+  box-shadow: none;
+}
+
+/* Bar Container */
+.bar-container {
+  background-color: transparent;
+  background-image: linear-gradient(135deg, 
+    $secondary-fixed,  
+    $surface-dim,
+    $primary-fixed-dim,
+    $surface-container,
+    $primary-fixed,
+    $surface-container,
+    $secondary-fixed-dim,
+  );
+  border: 1.5px solid $outline-variant;  
+  padding: 0px 5px 0px 5px;
+  min-height: 40px;
+}
+
+.task-box {
+  padding: 2px 4px;
+}
+
+.task-focused {
+  background: $primary;
+  border-radius: 5px;
+}
+
+.task-unfocused {
+  background: transparent;
+  opacity: 0.7;
+}
+
+.bar-section-center {
+  padding: 0px;
+  min-height: 18px;
+}
+
+.windows-center-bar {
+  background-color: $primary-fixed;
+  border-radius: 15px;
+  padding: 0px 10px 0px 10px;
+  min-height: 18px;
+}
+
+.bar-section-left {
+  padding: 0px 10px 0px 6px;
+  min-height: 18px;
+}
+
+.mode-indicator {
+  background-color: $surface;
+  padding: 0 10px;
+  border-radius: 15px;
+  min-height: 18px;
+  animation: pulse 2s infinite;
+}
+
+.bar-section-right {
+  padding: 0px;
+  min-height: 18px;
+}
+
+.workspaces {
+  border-radius: 15px;
+  padding: 0px;
+  min-height: 28px;
+  background-color: $secondary-fixed-dim;
+}
+
+.ws-btn {
+  padding: 0px 15px;
+}
+
+/* Workspace yang Focused (Aktif) */
+.ws-btn.focused {
+  background-color: transparentize($tertiary, 0.6);
+  border-radius: 15px;
+}
+
+/* Hover effect untuk semua button */
+.ws-btn:hover {
+  background-color: $secondary-fixed-dim;
+  border-radius: 15px;
+}
+
+/* Hover khusus untuk focused button */
+.ws-btn.focused:hover {
+  background-color: $outline;
+}
+
+.status-section-right {
+  background-color: $secondary-fixed-dim;
+  border-radius: 15px;
+  padding: 0px 10px 0px 10px;
+  min-height: 30px;
+}
+
+.system-tray-bar {
+  background-color: $secondary-fixed-dim;
+  border-radius: 15px;
+  padding: 0px 10px 0px 10px;
+  min-height: 30px;
+}
+
+.notification-section-right {
+  background-image: linear-gradient(135deg,
+    $secondary-fixed-dim
+  );
+  border-radius: 15px;
+  padding: 0px 16px;
+  min-height: 30px;
+}
+
+.media-section {
+  background-image: linear-gradient(135deg,
+    $secondary-fixed-dim
+  );
+  border-radius: 15px;
+  padding: 0px 16px;
+  min-height: 30px;
+}
+
+.notification-icon {
+  font-size: 14px;
+  color: $on-surface;
+}
+
+.media-icon {
+  font-size: 14px;
+  color: $on-surface;
+}
+
+.left-text {
+  font-size: 14px;
+}
+
+.right-text {
+  font-family: "Iosevka Nerd Font";
+  font-size: 12px;
+  color: $on-secondary-fixed;
+}
+
+.center-text {
+  font-family: "Iosevka Nerd Font";
+  font-size: 13px;
+  font-weight: 700;
+  color: $on-primary-fixed;
+}
+
+.weather-bar {
+  color: $foreground;
+  font-size: 18px;
+  padding: 0px 5px 0px 0px;
+}
+
+.text-weather-bar {
+  font-family: "Iosevka Nerd Font";
+  font-size: 13px;
+  font-weight: 700;
+  color: $foreground;
+}
+
+.time-bar {
+  min-height: 18px;
+  padding: 0px 5px 0px 5px;
+}
+
+.time-icon {
+  padding: 0px 0px 0px 0px;
+  font-size: 11px;  
+}
+
+.time-text {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.icon-center-bar {
+  padding: 0px 5px 0px 0px;
+  color: $on-secondary-container;
+  font-size: 12px;
+}
+
+
+
+

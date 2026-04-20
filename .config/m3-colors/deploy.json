@@ -1,0 +1,36 @@
+{
+  "deployments": [
+    {
+      "source": "colors-nvim.lua",
+      "destination": "~/.config/nvim/lua/themes/material3.lua"
+    },
+    {
+      "source": "qt5ct.conf",
+      "destination": "~/.config/qt5ct/style-colors.conf"
+    },
+    {
+      "source": "qt6ct.conf",
+      "destination": "~/.config/qt6ct/style-colors.conf"
+    },
+    {
+      "source": "zathurarc",
+      "destination": "~/.config/zathura/zathurarc"
+    },
+    {
+      "source": "kdeglobals",
+      "destination": "~/.config/kdeglobals"
+    },
+    {
+      "source": "kde.colors",
+      "destination": "~/.config/qt6ct/colors/material3.colors"
+    },
+    {
+      "source": "kde.colors",
+      "destination": "~/.local/share/color-schemes/Material3.colors"
+    },
+    {
+      "source": "colors.scss",
+      "destination": "~/.config/eww/colors.scss"
+    }
+  ]
+}
