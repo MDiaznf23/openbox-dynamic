@@ -12,6 +12,15 @@
 
 ---
 
+> ⚠️ **Status: Maintenance Mode / Framework Migration**
+>
+> This setup currently uses **Eww** for the bar/widgets, but Eww development has **stalled (no updates)**.
+> Some bugs related to Eww **cannot be fixed** from this ricing's configuration side, since the root cause lies in Eww itself, not in this setup.
+>
+> This repo will **migrate to a different bar/widget framework** in a future release. If you run into an Eww-related bug, it's likely already known and won't be patched, please wait for the migration update, or use this version with the understanding that some features may be unstable.
+
+---
+
 ### Demo Video
 
 https://github.com/user-attachments/assets/0523e493-e094-4353-ba6e-6bf922d4ef20
@@ -52,7 +61,7 @@ https://github.com/user-attachments/assets/0523e493-e094-4353-ba6e-6bf922d4ef20
 | Component     | App          |
 | :------------ | :----------- |
 | WM            | Openbox      |
-| Bar           | Eww          |
+| Bar           | Eww ⚠️ *(deprecated, will be replaced)* |
 | Theming       | m3wal        |
 | Compositor    | fastcompmgr  |
 | Terminal      | Alacritty    |
@@ -252,4 +261,3 @@ m3.deploy_configs()
 - [Arch Wiki - Openbox](https://wiki.archlinux.org/title/Openbox)
 
 ---
-
